@@ -11,10 +11,14 @@ const socket = io('http://localhost:5000'); //server; after deployment, mention 
 const ContextProvider = ({ children }) => {
     const [stream, setStream] = useState(null);
 
+    const myVideo = useRef();
+
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then((currentStream) => {
                 setStream(currentStream);
+
+                myVideo.current.srcObject = currentStream;
             })
-    })
+    });
 }
