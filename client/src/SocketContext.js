@@ -10,6 +10,7 @@ const socket = io('http://localhost:5000'); //server; after deployment, mention 
 
 const ContextProvider = ({ children }) => {
     const [stream, setStream] = useState(null);
+    const [me, setMe] = useState('');
 
     const myVideo = useRef();
 
@@ -19,6 +20,8 @@ const ContextProvider = ({ children }) => {
                 setStream(currentStream);
 
                 myVideo.current.srcObject = currentStream;
-            })
+            });
+        
+        socket.on('me', (id) => setMe(id));
     });
 }
