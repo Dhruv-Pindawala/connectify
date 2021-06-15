@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 const Options = ( { children } ) => {
     return (
         <div>
             Options
-            {children}
+            { children }
         </div>
-    )
+    );
 }
 
-export default Options
+export default Options;
