@@ -14,6 +14,7 @@ const ContextProvider = ({ children }) => {
     const [call, setCall] = useState({});
     const [callAccepted, setCallAccepted] = useState(false);
     const [name, setName] = useState('');
+    const [callEnded, setCallEnded] = useState(false);
 
     const myVideo = useRef();
     const userVideo = useRef();
@@ -71,4 +72,19 @@ const ContextProvider = ({ children }) => {
 
         connectionRef.current = peer;
     }
+
+    const leaveCall = () => {
+        setCallEnded(true);
+        connectionRef.current.destroy(); // stop taking input from mic and camera
+
+        window.location.reload(); // reloads page and provide user with new id
+    }
+
+    return (
+        <SocketContext.Provider value={{ call, callAccepted, myVideo, userVideo, stream, name, setName, callEnded, me, callUser, leaveCall, answerCall }}>
+            { children }
+        </SocketContext.Provider>
+    );
 }
+
+export { ContextProvider, SocketContext };
