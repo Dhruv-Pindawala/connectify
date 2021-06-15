@@ -11,6 +11,7 @@ const socket = io('http://localhost:5000'); //server; after deployment, mention 
 const ContextProvider = ({ children }) => {
     const [stream, setStream] = useState(null);
     const [me, setMe] = useState('');
+    const [call, setCall] = useState({});
 
     const myVideo = useRef();
 
@@ -23,5 +24,9 @@ const ContextProvider = ({ children }) => {
             });
         
         socket.on('me', (id) => setMe(id));
-    });
+
+        socket.on('calluser', ({ from, name: callerName, signal}) => {
+            setCall({ isReceivedCall: true, from, name: callerName, signal })
+        });
+    }, []);
 }
