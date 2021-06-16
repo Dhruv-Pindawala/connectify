@@ -6,7 +6,7 @@ import Peer from 'simple-peer';
 
 const SocketContext = createContext();
 
-const socket = io('https://conectifyme.herokuapp.com/'); //server; after deployment, mention full url of deployment server
+const socket = io('http://localhost:5000'); //server; after deployment, mention full url of deployment server
 
 const ContextProvider = ({ children }) => {
     const [stream, setStream] = useState(null);
